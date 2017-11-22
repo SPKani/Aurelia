@@ -1,0 +1,91 @@
+<template>
+    <!--<require from="./inputs.css#ux"></require>-->
+    <!--
+    <ux-input type="email" validation-errors.bind="emailErrors" class.bind="emailErrors.length ? 'has-error' : ''" view-model.ref="errorDemo1"
+        class="form-control" placeholder="Email" value.bind="email & validate"></ux-input>
+    <ux-input-info>
+        <span if.bind="emailErrors.length">${emailErrors[0].error.message}</span>
+        <span if.bind="!emailErrors.length">john@example.com</span>
+    </ux-input-info>
+
+    <ux-button type="raised" size="small" class="btn btn-primary">Submit</ux-button>-->
+
+    <ux-form>
+        <ux-field label="Job Title">
+            <ux-input maxlength="20" validation-errors.bind="jobTitleErrors" class.bind="jobTitleErrors.length ? 'has-error' : ''" view-model.ref="errorDemo1"
+                value.bind="jobTitle & validate"></ux-input>
+            <ux-input-info ux-input-counter target.bind="errorDemo1">
+                <span if.bind="jobTitleErrors.length">${jobTitleErrors[0].error.message}</span>
+                <span if.bind="!jobTitleErrors.length">eg:- Associate Consultant</span>
+            </ux-input-info>
+        </ux-field>
+
+        <ux-field label="Job Description">
+            <ux-textarea auto-resize maxlength="500" validation-errors.bind="jobDescriptionErrors" class.bind="jobDescriptionErrors.length ? 'has-error' : ''"
+                view-model.ref="errorDemo2" value.bind="jobDescription & validate"></ux-textarea>
+            <ux-input-info ux-input-counter target.bind="errorDemo2">
+                <span if.bind="jobDescriptionErrors.length">${jobDescriptionErrors[0].error.message}</span>
+            </ux-input-info>
+        </ux-field>
+
+        <ux-field label="Job Skills">
+        </ux-field>
+        <label repeat.for="jobSkill of jobSkills">            
+            <ux-checkbox value.bind="jobSkill" checked.bind="selectedStringJobSkills">${jobSkill}</ux-checkbox>           
+        </label>
+
+
+        <au-field>
+            <label>Job Type</label>
+        </au-field>
+        <label repeat.for="jobType of jobTypes">
+            <input type="radio" name="group1" model.bind="jobType.id" checked.bind="selectedJobTypeId">
+            ${jobType.id} - ${jobType.name}       
+        </label> 
+
+        <ux-field label="Address">
+            <ux-textarea auto-resize value.bind="address"></ux-textarea>
+        </ux-field>
+
+        <ux-field label="Date of Birth">
+            <ux-input validation-errors.bind="dateErrors" view-model.ref="errorDateRef" class.bind="dateErrors.length ? 'has-error' : ''" value.bind="dateOfBirth & validate" ></ux-input>
+            <ux-input-info target.bind="errorDateRef">
+                <span if.bind="dateErrors.length">${dateErrors[0].error.message}</span>                
+            </ux-input-info>
+        </ux-field>
+
+        <ux-field label="Email Address">
+            <ux-input type="email" validation-errors.bind="emailErrors" class.bind="emailErrors.length ? 'has-error' : ''" value.bind="email & validate" view-model.ref="errorEmailRef"></ux-input>
+            <ux-input-info target.bind="errorEmailRef">
+                <span if.bind="emailErrors.length">${emailErrors[0].error.message}</span>
+                <span if.bind="!emailErrors.length">eg:- email@example.com</span>
+            </ux-input-info>
+        </ux-field>
+
+        <ux-field label="State">            
+        </ux-field>        
+        <select value.bind="selectedStringState">
+            <option value="">Choose...</option>
+            <option repeat.for="state of states" 
+                value.bind="state">${state}
+            </option>
+        </select>
+
+        <ux-field label="Phone Number">
+            <ux-input value.bind="phoneNumber  & validate" validation-errors.bind="phoneErrors" class.bind="phoneErrors.length ? 'has-error' : ''" view-model.ref="errorPhoneRef"></ux-input>
+            <ux-input-info maxlength="10" target.bind="errorPhoneRef">
+                <span if.bind="phoneErrors.length">
+                     <span repeat.for="phoneError of phoneErrors">
+                         ${phoneError.error.message}
+                     </span>                    
+                </span>
+                <span if.bind="!phoneErrors.length">eg: 123-456-7890</span>
+            </ux-input-info>
+        </ux-field>
+
+
+        <ux-button click.delegate="submit()">Submit</ux-button>
+
+    </ux-form>
+
+</template>
